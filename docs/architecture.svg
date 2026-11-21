@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 720" width="1240" height="720" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+    </marker>
+    <marker id="arrO" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c2410c"/>
+    </marker>
+  </defs>
+  <rect width="1240" height="720" fill="#ffffff"/>
+  <text x="40" y="44" font-size="24" font-weight="700" fill="#0f172a">Cloud-based System Resource Monitoring Dashboard: Architecture</text>
+  <text x="40" y="70" font-size="14" fill="#475569">3 Linux VMs on the cloud platform · firewall allows only SSH, API and dashboard ports</text>
+
+  <!-- Monitored VMs -->
+  <g>
+    <rect x="40" y="110" width="300" height="200" rx="12" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="58" y="136" font-size="15" font-weight="700" fill="#0f172a">Monitored VM 1 (Linux)</text>
+    <rect x="60" y="152" width="260" height="138" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.5"/>
+    <text x="76" y="178" font-size="15" font-weight="700" fill="#0f172a">collector.py</text>
+    <text x="76" y="202" font-size="13" fill="#334155">Python + psutil</text>
+    <text x="76" y="224" font-size="13" fill="#334155">CPU · memory · disk · uptime</text>
+    <text x="76" y="246" font-size="13" fill="#334155">every 10–30 s, retries on</text>
+    <text x="76" y="264" font-size="13" fill="#334155">network failure</text>
+    <text x="76" y="282" font-size="12" fill="#64748b">started at boot by cron / systemd</text>
+  </g>
+  <g>
+    <rect x="40" y="400" width="300" height="200" rx="12" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="58" y="426" font-size="15" font-weight="700" fill="#0f172a">Monitored VM 2 (Linux)</text>
+    <rect x="60" y="442" width="260" height="138" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.5"/>
+    <text x="76" y="468" font-size="15" font-weight="700" fill="#0f172a">collector.py</text>
+    <text x="76" y="492" font-size="13" fill="#334155">Python + psutil</text>
+    <text x="76" y="514" font-size="13" fill="#334155">CPU · memory · disk · uptime</text>
+    <text x="76" y="536" font-size="13" fill="#334155">every 10–30 s, retries on</text>
+    <text x="76" y="554" font-size="13" fill="#334155">network failure</text>
+    <text x="76" y="572" font-size="12" fill="#64748b">started at boot by cron / systemd</text>
+  </g>
+  <text x="190" y="640" font-size="12" fill="#64748b" text-anchor="middle">stress-ng runs here for alert tests</text>
+
+  <!-- Server VM -->
+  <rect x="440" y="110" width="440" height="560" rx="12" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="458" y="136" font-size="15" font-weight="700" fill="#1e3a8a">Server VM (Linux): API, database and dashboard</text>
+
+  <rect x="470" y="160" width="380" height="170" rx="8" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="488" y="186" font-size="15" font-weight="700" fill="#0f172a">REST API (Python, runs as a service)</text>
+  <text x="488" y="212" font-size="13" font-family="Menlo, Consolas, monospace" fill="#1e293b">POST /metrics</text>
+  <text x="488" y="234" font-size="13" font-family="Menlo, Consolas, monospace" fill="#1e293b">GET  /vms</text>
+  <text x="488" y="256" font-size="13" font-family="Menlo, Consolas, monospace" fill="#1e293b">GET  /metrics?vm_id=&amp;from=&amp;to=</text>
+  <text x="488" y="278" font-size="13" font-family="Menlo, Consolas, monospace" fill="#1e293b">GET  /alerts</text>
+  <text x="488" y="300" font-size="13" font-family="Menlo, Consolas, monospace" fill="#1e293b">PUT  /thresholds</text>
+  <text x="488" y="320" font-size="12" fill="#64748b">JSON in/out · input validation · error codes</text>
+
+  <rect x="470" y="350" width="180" height="120" rx="8" fill="#fff7ed" stroke="#c2410c" stroke-width="1.5"/>
+  <text x="486" y="376" font-size="15" font-weight="700" fill="#0f172a">Alert check</text>
+  <text x="486" y="400" font-size="13" fill="#334155">each reading vs.</text>
+  <text x="486" y="418" font-size="13" fill="#334155">its threshold →</text>
+  <text x="486" y="436" font-size="13" fill="#334155">write alert record</text>
+  <text x="486" y="458" font-size="12" fill="#64748b">CPU 80 · Mem 85 · Disk 90 %</text>
+
+  <rect x="670" y="350" width="180" height="120" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.5"/>
+  <text x="686" y="376" font-size="15" font-weight="700" fill="#0f172a">SQL database</text>
+  <text x="686" y="400" font-size="13" font-family="Menlo, Consolas, monospace" fill="#1e293b">vms</text>
+  <text x="686" y="418" font-size="13" font-family="Menlo, Consolas, monospace" fill="#1e293b">metrics</text>
+  <text x="686" y="436" font-size="13" font-family="Menlo, Consolas, monospace" fill="#1e293b">thresholds</text>
+  <text x="686" y="454" font-size="13" font-family="Menlo, Consolas, monospace" fill="#1e293b">alerts</text>
+
+  <rect x="470" y="500" width="380" height="140" rx="8" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="488" y="526" font-size="15" font-weight="700" fill="#0f172a">Dashboard (HTML / CSS / JS + Chart.js)</text>
+  <text x="488" y="550" font-size="13" fill="#334155">VM list with live stats, auto-refresh</text>
+  <text x="488" y="572" font-size="13" fill="#334155">History chart: 1 h · 24 h · 7 d</text>
+  <text x="488" y="594" font-size="13" fill="#334155">Alerts panel, over-threshold VMs highlighted</text>
+  <text x="488" y="616" font-size="13" fill="#334155">Threshold settings · "API down" error state</text>
+
+  <!-- Right side -->
+  <rect x="960" y="160" width="240" height="110" rx="8" fill="#fff7ed" stroke="#c2410c" stroke-width="1.5"/>
+  <text x="978" y="188" font-size="15" font-weight="700" fill="#0f172a">Notifications</text>
+  <text x="978" y="212" font-size="13" fill="#334155">Email or Slack message</text>
+  <text x="978" y="232" font-size="13" fill="#334155">when a threshold is</text>
+  <text x="978" y="252" font-size="13" fill="#334155">crossed</text>
+
+  <rect x="960" y="510" width="240" height="110" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.5"/>
+  <text x="978" y="538" font-size="15" font-weight="700" fill="#0f172a">Team / viewer</text>
+  <text x="978" y="562" font-size="13" fill="#334155">Web browser on a laptop</text>
+  <text x="978" y="582" font-size="13" fill="#334155">or projector</text>
+  <text x="978" y="604" font-size="12" fill="#64748b">SSH to all VMs for admin</text>
+
+  <!-- Arrows: collectors to API -->
+  <path d="M320 221 L468 221" stroke="#334155" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <text x="394" y="210" font-size="12" fill="#334155" text-anchor="middle">POST /metrics</text>
+  <path d="M320 511 C400 511 400 260 468 260" stroke="#334155" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <text x="350" y="545" font-size="12" fill="#334155">POST /metrics</text>
+
+  <!-- API to alert check and DB -->
+  <path d="M560 330 L560 348" stroke="#c2410c" stroke-width="2" fill="none" marker-end="url(#arrO)"/>
+  <path d="M745 330 L745 348" stroke="#334155" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <path d="M780 350 L780 332" stroke="#334155" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <path d="M650 410 L668 410" stroke="#c2410c" stroke-width="2" fill="none" marker-end="url(#arrO)"/>
+
+  <!-- Dashboard to API (GET/PUT) -->
+  <path d="M470 570 C420 570 420 300 468 300" stroke="#1d4ed8" stroke-width="2" fill="none" marker-end="url(#arr)" stroke-dasharray="5 4"/>
+  <text x="392" y="620" font-size="12" fill="#1d4ed8" text-anchor="middle">GET / PUT</text>
+
+  <!-- Alert check to notifications -->
+  <path d="M560 470 L560 485 L910 485 L910 215 L958 215" stroke="#c2410c" stroke-width="2" fill="none" marker-end="url(#arrO)"/>
+  <text x="918" y="300" font-size="12" fill="#c2410c">on</text>
+  <text x="918" y="315" font-size="12" fill="#c2410c">breach</text>
+
+  <!-- Viewer to dashboard -->
+  <path d="M960 565 L852 565" stroke="#334155" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+  <text x="906" y="556" font-size="12" fill="#334155" text-anchor="middle">HTTP</text>
+
+  <!-- Legend -->
+  <g font-size="12" fill="#475569">
+    <line x1="960" y1="340" x2="990" y2="340" stroke="#334155" stroke-width="2"/><text x="998" y="344">metric data flow</text>
+    <line x1="960" y1="364" x2="990" y2="364" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="5 4"/><text x="998" y="368">dashboard API calls</text>
+    <line x1="960" y1="388" x2="990" y2="388" stroke="#c2410c" stroke-width="2"/><text x="998" y="392">alert path</text>
+    <rect x="960" y="404" width="30" height="16" fill="none" stroke="#64748b" stroke-dasharray="6 4"/><text x="998" y="417">VM boundary</text>
+  </g>
+</svg>
